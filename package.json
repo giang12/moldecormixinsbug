@@ -1,0 +1,34 @@
+{
+  "name": "mixins-bug",
+  "version": "1.0.0",
+  "description": "",
+  "author": "z",
+  "license": "ISC",
+  "main": "dist/index",
+  "bin": "dist/main",
+  "scripts": {
+    "make": "npm run clean && npm i && npm run build && npm run test",
+    "start": "npm run service",
+    "service": "node dist/main",
+    "dev": "concurrently \"npm run compile:w\" \"nodemon dist/main\"",
+    "doc": "npm run build:latest && bash ./yo/run test/main",
+    "build": "npm run compile",
+    "build:latest": "npm run clean && docker build -t test/main .",
+    "test": "npm run compile && jest --forceExit --coverage --verbose",
+    "compile": "tsc",
+    "compile:w": "tsc -w",
+    "clean": "rm -rf dist/ && rm -rf node_modules/ && rm -rf logs/ && rm -rf coverage/ && rm -f package-lock.json"
+  },
+  "dependencies": {
+    "moleculer": "^0.13.9",
+    "moleculer-decorators": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^11.13.7",
+    "concurrently": "^4.1.0",
+    "jest": "^24.7.1",
+    "moleculer-repl": "^0.5.7",
+    "nodemon": "^1.18.11",
+    "typescript": "^3.4.5"
+  }
+}
